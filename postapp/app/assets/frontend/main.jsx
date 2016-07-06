@@ -1,7 +1,8 @@
+import Greet from './greet';
 class Main extends React.Component {
   render(){
     return (
-      <h2>Hello from the component</h2>
+      <Greet />
     );
   }
 }
