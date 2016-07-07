@@ -7,11 +7,22 @@ let mockPosts = [
   {id:3,  name:"Peter3", body: "hello this is my3 post"}
 ]
 class Main extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {postsList: mockPosts};
+  }
+  addPost(postToAdd){
+    let newPostsList = this.state.postsList;
+    console.log(newPostsList);
+    newPostsList.unshift({id:Date.now(), name: 'Guest', body:postToAdd})
+
+    this.setState({postsList:newPostsList});
+  }
   render(){
     return (
       <div>
-        <PostBox />
-        <PostList posts={mockPosts}/>
+        <PostBox sendPost={this.addPost.bind(this)}/>
+        <PostList posts={this.state.postsList}/>
       </div>
     );
   }

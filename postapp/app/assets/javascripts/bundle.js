@@ -72,20 +72,32 @@
 	var Main = function (_React$Component) {
 	  _inherits(Main, _React$Component);
 	
-	  function Main() {
+	  function Main(props) {
 	    _classCallCheck(this, Main);
 	
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Main).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Main).call(this, props));
+	
+	    _this.state = { postsList: mockPosts };
+	    return _this;
 	  }
 	
 	  _createClass(Main, [{
+	    key: 'addPost',
+	    value: function addPost(postToAdd) {
+	      var newPostsList = this.state.postsList;
+	      console.log(newPostsList);
+	      newPostsList.unshift({ id: Date.now(), name: 'Guest', body: postToAdd });
+	
+	      this.setState({ postsList: newPostsList });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return React.createElement(
 	        'div',
 	        null,
-	        React.createElement(_PostBox2.default, null),
-	        React.createElement(_PostList2.default, { posts: mockPosts })
+	        React.createElement(_PostBox2.default, { sendPost: this.addPost.bind(this) }),
+	        React.createElement(_PostList2.default, { posts: this.state.postsList })
 	      );
 	    }
 	  }]);
@@ -129,6 +141,13 @@
 	  }
 	
 	  _createClass(PostBox, [{
+	    key: "sendPost",
+	    value: function sendPost() {
+	      event.preventDefault();
+	      this.props.sendPost(this.refs.postTextArea.value);
+	      this.refs.postTextArea.value = '';
+	    }
+	  }, {
 	    key: "render",
 	    value: function render() {
 	      return React.createElement(
@@ -136,11 +155,11 @@
 	        { className: "container" },
 	        React.createElement(
 	          "form",
-	          null,
+	          { onSubmit: this.sendPost.bind(this) },
 	          React.createElement(
 	            "div",
 	            { className: "input-field" },
-	            React.createElement("textarea", { className: "materialize-textarea" }),
+	            React.createElement("textarea", { ref: "postTextArea", className: "materialize-textarea" }),
 	            React.createElement(
 	              "label",
 	              null,
@@ -148,7 +167,7 @@
 	            ),
 	            React.createElement(
 	              "button",
-	              { classNme: "btn right" },
+	              { type: "submit", classNme: "btn right" },
 	              "Post Now"
 	            )
 	          )
@@ -203,6 +222,7 @@
 	  _createClass(PostList, [{
 	    key: "render",
 	    value: function render() {
+	      console.log(this.props);
 	      var posts = this.props.posts.map(function (post) {
 	        return React.createElement(_Post2.default, _extends({ key: post.id }, post));
 	      });
