@@ -1,3 +1,4 @@
+var ProgressBarPlugin = require('progress-bar-webpack-plugin');
 module.exports = {
     entry: "./app/assets/frontend/main.jsx",
     output: {
@@ -19,5 +20,8 @@ module.exports = {
     },
     query:{
         presets:['react']
-    }
+    },
+    plugins: [
+        new ProgressBarPlugin()
+      ]
 };
