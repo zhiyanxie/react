@@ -24,9 +24,10 @@ nvm install 4.2.3
 
 
 
+
+
 * Ruby version
-Rails version	4.2.4
-Ruby version	2.2.2-p95 (x86_64-darwin14)
-RubyGems version	2.4.8
-Rack version	1.6.4
-JavaScript Runtime	Node.js (V8)
+#Rails version	4.2.4
+#Ruby version	2.2.2-p95 (x86_64-darwin14)
+#Rack version	1.6.4
+#JavaScript Runtime	Node.js (V8)
